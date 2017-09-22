@@ -1,0 +1,155 @@
+\section{Множество, функция, отношения порядка. (04.09.2017)}
+
+\begin{defin}
+	\underline{Множество}~-- набор (совокупность и т.п.) объектов, которые называются \underline{элементами множества}. ($a \in A$)
+\end{defin} 
+
+Способы задания множества:
+\begin{itemize}
+  \item перечисление: $\left\{ a, b, c \right\}$;
+  \item указание свойства: $\left\{ x: x^2 < 0 \right\}$.
+\end{itemize}
+
+\phantomsection
+\label{russel_paradox}
+В связи с последним способом возникает \textit{парадокс Рассела}: пусть $K$~-- набор всех множеств, которые не содержат себя в качестве элемента (например, $\left\{ 1,2 \right\} \in \left\{ 1, \left\{ 1, 2 \right\} \right\}$). Проверим $K \overset{?}{\in} K$. Если $K \in K$, получаем противоречие с определением $K$; если же $K \not\in K$, также противоречие (все такие множества уже собраны в $K$). (другая формулировка парадокса Рассела~-- \textit{парадокс брадобрея}) Парадокс был разрешен с помощью аксиоматики Цермело-Френкеля (называемая наивной теорией множеств). Также дополнительно вводится аксиома выбора.\\
+
+\underline{Упражнение}:
+\begin{itemize}
+	\item доказать формулы де Моргана: $C \setminus (A \cup B) = (C \setminus A) \cap (C \setminus B)$ и $C \setminus (A \cap B) = (C \setminus A) \cup (C \setminus B)$;
+	\item доказать почему не существует диаграмм Венна (кругов Эйлера) для количества множеств $\ge 4$.\\
+\end{itemize}
+
+\begin{defin}
+	\underline{Функция} $f: X \to Y$~-- закон (правило и т.п.), сопоставляющий каждому $x \in X$ ровно один $y \in Y$. Обозначается $y=f(x)$ или $x \mapsto y$.
+\end{defin}
+
+\begin{ex}
+	$y^2 = x$~-- не функция; $x \mapsto x^2$~-- функция.
+\end{ex}
+
+\begin{defin}
+	Если $f: X \to Y$ и $g: Y \to Z$, тогда $g \circ f(x) = g(f(x))$ называется \underline{композицией функций}.
+\end{defin}
+
+\begin{claim}
+	Композиция ассоциативна: $g \circ (h \circ f) = (g \circ h) \circ f$.
+\end{claim}
+\begin{proof}
+	$g \circ (h \circ f)(x) = g(h \circ f(x)) = g(h(f(x)));$\\
+	$(g \circ h) \circ f(x) = g \circ h(f(x)) = g(h(f(x)).$
+\end{proof}
+
+\begin{defin}
+	$f: X \to Y$~-- \underline{инъекция}, если $x_1 \neq x_2 \Rightarrow f(x_1) \neq f(x_2)$.\\
+	$f: X \to Y$~-- \underline{сюръекция}, если $\forall y \in Y\, \exists x \in X: f(x)=y$. (значения $f$ полностью закрывают $Y$)\\
+	Если $f$ инъекция и сюръекция, то она \underline{биекция} (взаимнооднозначное соответствие). (композиция биекций является биекцией)
+\end{defin}
+\begin{defin}
+	Если существует биекция $f: X \to Y$, то $X$ и $Y$ \underline{равномощны}. Обозначается $X \sim Y$.
+\end{defin}
+\begin{claim}
+	Пусть $f: X \to Y$~-- биекция. Определена функция $Y \to X$, которая сопоставляет каждому $y$ такой $x$, что $f(x)=y$. Эта функция называется \underline{обратной к $f$} и обозначается $f^{-1}$. (она также является биекцией, что следует из биективности $f$)
+\end{claim}
+
+Рассмотрим множество всех биекций $X$ на себя: $G(X) := \{f: X \to X | f - биекция\}$. Свойства:
+\begin{enumerate}
+	\item $f \circ (g \circ h) = (f \circ g) \circ h$;
+	\item $\exists e: e \circ f = f \circ e = f$; $(e(X)=X)$
+	\item $\forall f\, \exists f^{-1}: f^{-1} \circ f = f \circ f^{-1} = e$.
+\end{enumerate}
+Если на некотором множестве выполняются все 3 свойства, то это \textit{группа} (биекций, в нашем случае).
+\begin{ex}
+	$(\Z, +); \; (\Q \setminus \{0\}, \cdot)$.
+\end{ex}
+
+\begin{theo}[Кэли]
+	Всякая группа может быть реализована как подгруппа биекций.
+\end{theo}
+\begin{proof}
+	Возьмем группу $(B, \circ)$ и для элемента $b \in B$ зададим отображение $b \mapsto f_b(a)=b \circ a$. Проверим, что $ f_b(a)$~-- биекция: $\cancel{b} \circ a_1 = \cancel{b} \circ a_2$ (инъекция), $c = b \circ a \Rightarrow b^{-1} \circ c = a$ (сюръекция). Получили $B \mapsto G(B)$. Теперь рассмотрим $b_1 \circ b_2 \mapsto f_{b_1 \circ b_2}(a) = (b_1 \circ b_2) \circ a = b_1 \circ (b_2 \circ a) = f_{b_1}(f_{b_2}(a)) = f_{b_1} \circ f_{b_2}$. Получили, что «произведение» элементов изоморфно произведению биекций.
+\end{proof}
+
+\underline{Упражнение}: $G(X)$~-- абелева группа $\Leftrightarrow |X| \le 2$.\\
+
+\textit{Свойства равномощных множеств}:
+\begin{enumerate}
+	\item $X \sim X$;
+	\item $X \sim Y \Rightarrow Y \sim X$;
+	\item $X \sim Y \land Y \sim Z \Rightarrow X \sim Z$.
+\end{enumerate}
+
+\begin{theo}[Кантора-Бернштейна]
+	$A \sim B' \subset B \land B \sim A' \subset A \Rightarrow A \sim B$.
+\end{theo}
+\begin{proof}
+	TODO с рисуночками
+\end{proof}
+
+\begin{theo}[Кантора]
+	$A \not \sim 2^A$~-- множеству всех подмножеств множества $A$.
+\end{theo}
+\begin{proof}
+	(от противного) Пусть есть биекция $f: A \to 2^A \Rightarrow \forall a \in A: a \mapsto f(a) \subset A$. Построим множество $K = \{a: a \not \in f(a)\} \subset A \Rightarrow K=f(b)$. Далее аналогично \hyperref[russel_paradox]{парадоксу Рассела} надо проверить $b \overset{?}{\in} K$.
+\end{proof}
+
+\begin{defin}
+	\underline{Декартово произведение} $A \times B = \{(a,b) | a \in A \land b \in B\}$~-- множество упорядоченных пар.
+\end{defin}
+\begin{defin}
+	Если $f: X \to Y$, то в $X \times Y$ определено подмножество $\Gamma_f = \{(x,y) | y=f(x)\}$, которое называется \underline{графиком функции}.
+\end{defin}
+
+Говорим, что задана функция $X \to Y$, если задано подмножество $\Gamma \subset X \times Y$ со свойствами:
+\begin{enumerate}
+	\item $\forall x\, \exists y: (x,y) \in \Gamma$;
+	\item $(x,y) \in \Gamma \land (x,z) \in \Gamma \Rightarrow y=z$.
+\end{enumerate}
+
+\begin{defin}
+	На множестве  $X$ задано \underline{отношение частичного порядка}, если для $R \subset X \times X$ выполняются свойства:
+	\begin{enumerate}
+		\item $(x,x) \in R$;
+		\item $(x,y) \in R \land (y,x) \in R \Rightarrow x=y$;
+		\item $(x,y) \in R \land (y,z) \in R \Rightarrow (x,z) \in R$.
+	\end{enumerate}
+\end{defin}
+\begin{ex}
+	\begin{itemize}
+		\item $\le$ на числах;
+		\item $A \le B$, если $A \subset B$;
+		\item на $\N: n \le m$, если $n|m$ ($n$ делит $m$).
+	\end{itemize}
+\end{ex}
+
+\begin{defin}
+	На множестве  $X$ задано \underline{отношение линейного порядка}, если $\forall a,b \in X: a \le b \lor b \le a$.
+\end{defin}
+
+Далее будем писать $b < a$, если $b \le a \land b \neq a$.
+
+\begin{defin}
+	\underline{Вполне упорядоченные множества}~-- это линейно упорядоченные множества, в которых в каждом непустом подмножестве есть наименьший элемент. Также называются множествами с полным порядком.
+\end{defin}
+\begin{ex}
+	$\N$ (множество натуральных чисел).
+\end{ex}
+
+Опишем $\N$ используя \textbf{аксиомы Пеано}:
+\begin{enumerate}
+	\item для каждого элемента $n$ определен единственный следующий за ним элемент $n+1$;
+	\item существует единственный элемент, который не следует ни за каким и называется $1$;
+	\item у всякого элемента кроме $1$ есть тот, за которым он следует;
+	\item \textbf{аксиома индукции} (метод математической индукции): если $M \subset \N: 1 \in M \land n \in M \Rightarrow n+1 \in M$, то $M=\N$. (взято минимальное из таких множеств)
+\end{enumerate}
+
+\textbf{Полная индукция}: если $\forall n\, \{k < n\} \subset M \Rightarrow n \in M$, то $M=\N$.
+
+\begin{claim}
+	Линейно упорядоченное множество $A$ вполне упорядочено $\Leftrightarrow$ на $A$ выполняется аксиома индукции: если $\forall B\, \subset A \{a < b\} \subset B \Rightarrow b \in B$, то $B=A$.
+\end{claim}
+\begin{proof}
+	$\Rightarrow:$ Пусть $B$ удовлетворяет аксиоме индукции, но $B \neq A$. Возьмем $A \setminus B \neq \varnothing \Rightarrow$ есть наименьший элемент $c \in A \setminus B \Rightarrow \{a < c\} \subset B \Rightarrow c \in B$ по аксиоме индукции $\Rightarrow$ противоречие.
+	
+	$\Leftarrow:$ пусть $B \subset A, B \neq \varnothing$, но в $B$ нет наименьшего элемента. Рассмотрим $A \setminus B$: $\{a < c\} \subset A \setminus B \Rightarrow c \in A \setminus B \Rightarrow A \setminus B = A$ (выполняется аксиома индукции) $\Rightarrow B=\varnothing \Rightarrow$ противоречие.
+\end{proof}
