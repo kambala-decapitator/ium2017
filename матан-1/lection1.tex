@@ -146,7 +146,7 @@
 \textbf{Полная индукция}: если $\forall n\, \{k < n\} \subset M \Rightarrow n \in M$, то $M=\N$.
 
 \begin{claim}
-	Линейно упорядоченное множество $A$ вполне упорядочено $\Leftrightarrow$ на $A$ выполняется аксиома индукции: если $\forall B\, \subset A \{a < b\} \subset B \Rightarrow b \in B$, то $B=A$.
+	Линейно упорядоченное множество $A$ вполне упорядочено $\Leftrightarrow$ на $A$ выполняется аксиома индукции: $\forall B \subset A$ если $\{a < b\} \subset B \Rightarrow b \in B$, то $B=A$.
 \end{claim}
 \begin{proof}
 	$\Rightarrow:$ Пусть $B$ удовлетворяет аксиоме индукции, но $B \neq A$. Возьмем $A \setminus B \neq \varnothing \Rightarrow$ есть наименьший элемент $c \in A \setminus B \Rightarrow \{a < c\} \subset B \Rightarrow c \in B$ по аксиоме индукции $\Rightarrow$ противоречие.
