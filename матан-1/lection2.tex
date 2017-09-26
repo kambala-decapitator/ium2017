@@ -40,8 +40,8 @@
 
 \textbf{Аксиома выбора}.
 \begin{itemize}
-	\item Пусть есть набор множеств $\{X_\alpha\}: X_\alpha \cap X_\beta = \varnothing, \alpha \neq \beta$, тогда $\exists C \subset \underset{\alpha}{\cup} X_\alpha: \forall \alpha\, C \cap X_\alpha$ состоит ровно из одного элемента.
-	\item (эквивалентная формулировка) Пусть есть набор множеств $\{X_\alpha\}: X_\alpha \neq \varnothing$, тогда $\exists f: \{X_\alpha\} \to \underset{\alpha}{\cup} X_\alpha: f(X_\alpha) \in X_\alpha$. (переход из предыдущей формулировки в эту: $X_\alpha \mapsto \tilde{X}_\alpha = \{(x,\alpha) | x \in X_\alpha\}$)
+	\item Пусть есть набор множеств $\{X_\alpha\}: X_\alpha \cap X_\beta = \varnothing, \alpha \neq \beta$, тогда $\exists C \subset \underset{\alpha}{\bigcup} X_\alpha: \forall \alpha\, C \cap X_\alpha$ состоит ровно из одного элемента.
+	\item (эквивалентная формулировка) Пусть есть набор множеств $\{X_\alpha\}: X_\alpha \neq \varnothing$, тогда $\exists f: \{X_\alpha\} \to \underset{\alpha}{\bigcup} X_\alpha: f(X_\alpha) \in X_\alpha$. (переход из предыдущей формулировки в эту: $X_\alpha \mapsto \tilde{X}_\alpha = \{(x,\alpha) | x \in X_\alpha\}$)
 \end{itemize}
 
 \begin{theo}[Цермело]
@@ -116,7 +116,7 @@
 	$A$ \underline{левее} $B$, если $a \le b \quad \forall a \in A, b \in B$.
 \end{defin}
 
-\textbf{Аксиома полноты}. Если есть два непустых множества $A$ и $B$ такие, что $A$ левее $B$, то существует $c$, который их разделяет, то есть $A$ левее $\{c\}$ и $\{c\}$ левее $B$.
+\label{axiom_completeness}\textbf{Аксиома полноты}. Если есть два непустых множества $A$ и $B$ такие, что $A$ левее $B$, то существует $c$, который их разделяет, то есть $A$ левее $\{c\}$ и $\{c\}$ левее $B$.
 \begin{defin}
 	Упорядоченное поле, на котором выполняется аксиома полноты, называется \underline{множеством вещественных (действительных) чисел} и обозначается $\R$.
 \end{defin}

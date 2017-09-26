@@ -1,0 +1,111 @@
+\section{Иррациональные числа, принципы полноты, аксиома Архимеда, комплексные числа, кватернионы, теорема Фробениуса. (18.09.2017)}
+
+\begin{claim}
+	$\sqrt{2}$ существует в $\R$.
+\end{claim}
+\begin{proof}
+	Используем \hyperref[axiom_completeness]{аксиому полноты}: пусть $A = \{x > 0 : x^2 < 2\}, B = \{x > 0 : x^2 > 2\}$. Очевидно, что эти множества непусты и $A$ левее $B$: $x^2 < y^2 \Rightarrow x < y$. Покажем, что элемент $c$, который разделяет $A$ и $B$, удовлетворяет $c^2 = 2$. От противного: пусть $c^2 > 2$, тогда $\exists \epsilon > 0: (c - \epsilon)^2 > 2$, но $c - \epsilon \in B$ левее $c \Rightarrow$ противоречие. Аналогично показывается для $A$ и $c + \epsilon$. Остается только $c^2 = 2$.
+\end{proof}
+
+\begin{defin}
+	Если $c \ge a\; \forall a \in A$, то $c$ называется \underline{верхней гранью} $A$. Наименьшая из верхних граней называется \underline{точной верхней гранью} и обозначается $\sup{A}$.\\
+	Если $c \le a\; \forall a \in A$, то $c$ называется \underline{нижней гранью} $A$. Наибольшая из нижних граней называется \underline{точной нижней гранью} и обозначается $\inf{A}$.
+\end{defin}
+
+\begin{theo}[принцип полноты Вейерштрасса]
+	Если $A \neq \varnothing$ и существует верхняя грань, то существует и точная верхняя грань. Аналогичное утверждение и для нижней грани.
+\end{theo}
+\begin{proof}
+	Пусть $B$~-- множество верхних граней $A$, $A,B \neq \varnothing \Rightarrow \exists c: A \le c \le B \Rightarrow c = \sup{A}$. Аналогично для нижней грани.
+\end{proof}
+
+\label{axiom_Archimedes}\begin{cor}[аксиома Архимеда]
+	$\N$ неограниченно сверху.
+\end{cor}
+\begin{proof}
+	(от противного) Пусть $\N$ ограниченно сверху, то есть $a = \sup{\N}$. Рассмотрим элемент $a-1$: он не является верхней гранью $\Rightarrow \exists n \in \N: n > a-1 \Rightarrow n+1 > a \Rightarrow$ противоречие.
+\end{proof}
+
+\label{nested_intervals}\begin{theo}[о вложенных отрезках (принцип полноты Кантора)]
+	Пусть $[a_1, b_1] \supset [a_2, b_2] \supset \dots~ \supset [a_n, b_n] \supset [a_{n+1}, b_{n+1}] \supset \dots$~-- система вложенных отрезков. Тогда:
+	\begin{enumerate}
+		\item $\underset{k}{\bigcap} [a_k, b_k] \neq \varnothing$;
+		\item если $\forall \epsilon > 0\, \exists n \in \N: b_n - a_n < \epsilon$, то пересечение всех отрезков состоит из одной точки.
+	\end{enumerate}
+\end{theo}
+\begin{proof}
+	TODO
+\end{proof}
+
+\begin{theo}
+	Из \hyperref[nested_intervals]{принципа вложенных отрезков} и \hyperref[axiom_Archimedes]{аксиомы Архимеда} следует \hyperref[axiom_completeness]{аксиома полноты}.
+\end{theo}
+\begin{proof}
+	TODO\\
+\end{proof}
+
+\begin{defin}
+	Множество $V$ называется \underline{линейным пространством над $\R$}, если его элементы можно складывать между собой и умножать на числа из $\R$:
+	\begin{enumerate}
+		\item $(V,+)$~-- абелева группа;
+		\item $\forall v,u \in V\; \forall \alpha, \beta \in \R: 1 \cdot v = v,\; \alpha(\beta v) = (\alpha \beta)v,\; \alpha(v+u) = \alpha v + \alpha u,\; (\alpha + \beta)v = \alpha v + \beta v$.
+	\end{enumerate}
+\end{defin}
+\begin{ex}
+	\begin{itemize}
+		\item $\R^2: (x_1, x_2); \quad (x_1, x_2) + (y_1, y_2) = (x_1 + y_1, x_2 + y_2); \; \alpha(x_1 + x_2) = \alpha x_1 + \alpha x_2$;
+		\item $\R^n, n \in \N \setminus \{1\}$.\\
+	\end{itemize}
+\end{ex}
+
+Попробуем ввести операцию умножения на $\R^2$, чтобы получить аналог умножения в $\R$:
+\begin{itemize}
+	\item $(a, b) \mapsto a+bi, \quad i^2 = -1$;
+	\item $(a+bi) + (c+di) = (a+c) + (b+d)i$;
+	\item $(a+bi)(c+di) = (ac-bd) + (ad+bc)i$;
+	\item $\dfrac{1}{a+bi} = \dfrac{a-bi}{a^2+b^2} = \dfrac{a}{a^2+b^2} - \dfrac{b}{a^2+b^2}i$;
+	\item $a + 0 \cdot i$ отождествляется с $\R$.
+\end{itemize}
+\begin{defin}
+	Множество выражений вида $(a+bi)$ с такими операциями сложения и умножения называется \underline{множеством компл\'{е}ксных чисел} и обозначается $\Complex$.
+\end{defin}
+
+$\bar{z} = a-bi$~-- \textit{сопряженное число}. (задает симметрию относительно вещественной оси)\\
+
+\textit{Тригонометрическая форма комплексного числа}. Пусть $z = a+bi$:
+\begin{itemize}
+	\item $|z| = \sqrt{a^2+b^2},\, a = |z| \cos{\phi},\, b = |z| \sin{\phi} \Rightarrow z = |z|( \cos{\phi} + i \sin{\phi} )$;
+	\item $w = |w|( \cos{\psi} + i \sin{\psi} ) \Rightarrow z \cdot w = |z||w| ( \cos{(\phi + \psi)} + i \sin{(\phi + \psi)} )$. (поворот и гомотетия)\\
+\end{itemize}
+
+На $\R^3$ нельзя «изобрести» умножение, а в $\R^4$ можно, но без коммутативности:
+\begin{itemize}
+	\item $q = a+bi+cj+dk$;
+	\item $q+q' = (a+a') + (b+b')i + (c+c')j + (d+d')k$;
+	\item $i^2=j^2=k^2=-1$;
+	\item $ijk=-1 \Rightarrow ij=k,\, ji=-k,\, jk=i,\, kj = -i,\, ik=-j,\, ki=j$.
+\end{itemize}
+\begin{defin}
+	Множество $\{q\}$ называется \underline{кватернионами} и обозначается $\mathbb{H}$.
+\end{defin}
+
+Кватернионы задают вращения в $\R^3$. Рассмотрим чисто мнимые кватернионы: $q_x = x_1i + x_2j +x_3k$, где $(x_1, x_2, x_3) \in \R^3$.
+\begin{align*}
+	q_x q_y &= [x,y] - \left< x,y \right>,\\
+	[x,y] &= \begin{vmatrix}
+	i & j & k \\ 
+	x_1 & x_2 & x_3 \\ 
+	y_1 & y_2 & y_3
+	\end{vmatrix},\\
+	\left< x,y \right> &= x_1y_1 + x_2y_2 + x_3y_3,
+\end{align*}
+где $[x,y]$~-- векторное произведение, $\left< x,y \right>$~-- скалярное произведение.
+
+Пусть $q=a+q'$ и $|q|=1$, тогда $q = \cos{\phi} + p \sin{\phi}$, где $p$~-- чисто мнимый кватернион и $|p|=1$. Пусть также $v = x_1i + x_2j +x_3k$, тогда $qv = v \cos{\phi} + pv \sin{\phi} = |пусть~p \perp v| = v \cos{\phi} + [p,v] \sin{\phi}$ задает поворот $v$ вокруг $p$ на угол $\phi$. $qv \bar{q}$~-- поворот $v$ вокруг $p$ на угол $2\phi$, $\bar{q} = a-bi-cj-dk$.
+
+\begin{theo}[Фробениуса]
+	Умножение можно ввести только в $\R,\, \R^2$ и $\R^4$.
+\end{theo}
+\begin{proof}
+	TODO
+\end{proof}
