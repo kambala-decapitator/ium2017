@@ -1,0 +1,148 @@
+\section{Многочлены: деление с остатком, теорема Безу, неприводимость, НОД, алгоритм Евклида, основная теорема арифметики. (13.09.2017)}
+
+Через $\K$ будем обозначать одно из множеств: $\Z, \Q, \R, \Complex$.
+
+\begin{defin}
+	$a_{0}+a_{1}x+a_{2}x^{2}+\ldots+a_{n}x^{n}=P(x)$~-- \underline{многочлен}, $a_i \in \K$~-- его \underline{коэффициенты}. Множество многочленов с коэффициентами в $\K$ обозначается $\K[x]$.
+\end{defin}
+\begin{defin}
+	Если $a_{n} \neq 0$, то число $n$ называется \underline{степенью многочлена} и обозначается $\deg{P(x)}$. $\deg{P(x)} = 0 \Leftrightarrow P=a_0, \quad \deg(P \cdot Q) = \deg{P} + \deg{Q}$.
+\end{defin}
+
+\begin{defin}
+	$P,Q \in \K[x]$. $P$ \underline{делится} на $Q$, если $\exists S \in \K[x]: P = Q \cdot S$. Обозначается $P \vdots Q$.
+\end{defin}
+\begin{defin}
+	\underline{Разделить $P$ на $Q$ с остатком}~-- значит найти $C, R: P = Q \cdot C + R$, где $R=0 \lor \deg  R < \deg  Q$.
+\end{defin}
+\begin{ex}
+	$\arraycolsep=0.05em
+	\begin{array}{rrrrrrr@{\,}l|l}
+		x^4&{} -2x^3&{} +3x^2&{}&{} +7&&&&\, x+3 \\
+		\cline{9-1} x^4&{} +3x^3&&&&&&&\, x^3-5x^2+18x-54 \\
+		\cline{1-2} &{} -5x^3&{} +3x^2&{} \\
+		&{} -5x^3&{} -15x^2&{} \\
+		\cline{2-3} &{}&{} 18x^2&{} \\
+		&{}&{} 18x^2&{} + 54x&{} \\
+		\cline{4-3} &{}&{}&{} -54x&{} + 7&{} \\
+		&{}&{}&{} -54x&{} -162&{} \\
+		\cline{4-5} &{}&{}&{}&{} 169
+	\end{array} \\
+	x^4-2x^3+3x^2+7 = (x+3)(x^3-5x^2+18x-54) + 169$.
+\end{ex}
+
+\begin{claim}
+	Результат деления с остатком единственен.
+\end{claim}
+\begin{proof}
+	(от противного) Пусть есть два результирующих многочлена: $Q \cdot C_{2} + R_{2} = P = Q \cdot C_{1} + R_{1} \Rightarrow Q(C_{1} - C{2}) = R_{2} - R_{1}$. Получаем $\deg Q(C_{1}-C{2}) \ge \deg Q \land \deg R_{2} - R_{1} < \deg Q \Rightarrow$ противоречие.
+\end{proof}
+
+\begin{theo}[Безу]
+	Пусть $P(x) \in \K[x]$ и $x-a, a \in \K$. Остаток от деления $P(x)$ на $x-a$ равен $P(a)$.
+\end{theo}
+\begin{proof}
+	Поделим $P(x)$ на $x-a$ с остатком: $P(x)=C(x) \cdot (x-a) + R, R \in \K$. Подставим $x=a$: $P(a)=C(a) \cdot (a-a) + R = R$.
+\end{proof}
+\begin{cor}
+	\begin{enumerate}
+		\item $P(a)=0 \Leftrightarrow P \vdots (x-a)$; ($a$~-- \underline{корень многочлена})
+		\item $a_1, \ldots, a_k$~-- различные корни $P \Leftrightarrow P \vdots (x-a_{1})(x-a_{2}) \ldots (x-a_{k})$; (объяснение для двух корней $a_1, a_2$: пусть $P \vdots (x-a_1)$, тогда $P(x)=(x-a_1)C(x)$; подставим $a_2$: $0=(a_2-a_1)C(a_2) \Rightarrow C(a_2)=0 \Rightarrow C(a_2)=(x-a_2)C_1(x)$)
+		\item у $P(x)$ не более $\deg P$ различных корней;
+		\item пусть $P_1, P_2 \in \K[x]$ и уравнение $P_1(x)=P_2(x)$ имеет бесконечно много решений. Тогда $P_1=P_2$ как многочлены (все соответствующие коэффициенты равны).
+	\end{enumerate}
+\end{cor}
+
+\begin{defin}
+	$P(x)$ \underline{неприводим} в $\K[x]$, если $\deg P > 0$ и из $P(x)=P_1(x) \cdot P_2(x)$ следует $\deg P_1 = 0 \lor \deg P_2 = 0$.
+\end{defin}
+
+\phantomsection\label{GCD_def1}\begin{defin}[О1]
+	\underline{НОД} (наибольший общий делитель) многочленов $P$ и $Q$~-- это их общий делитель, имеющий максимально возможную степень.
+\end{defin}
+\phantomsection\label{GCD_def2}\begin{defin}[О2]
+\underline{НОД} многочленов $P$ и $Q$~-- это такой многочлен $D$, что:
+\begin{enumerate}
+	\item $P,Q \vdots D$;
+	\item $P \vdots D' \land Q \vdots D' \Rightarrow D \vdots D'$.
+\end{enumerate}
+\end{defin}
+Из \hyperref[GCD_def2]{О2} следует \hyperref[GCD_def1]{О1}.
+
+\begin{defin}
+	$P,Q \in \K[x]$ эквивалентны, если $\exists c,c' \in \K: P=cQ,\, Q=c'P$ (равны с точностью до умножения на константу).
+\end{defin}
+\begin{rem}
+	$P \sim Q \Leftrightarrow P \vdots Q \land Q \vdots P$.
+\end{rem}
+Если $D_1, D_2$~-- $\operatorname{\text{НОД}}(P,Q)$ по \hyperref[GCD_def2]{О2}, то $D_1 \sim D_2$. \\
+
+\phantomsection\label{Euclid_alg}\textbf{Алгоритм Евклида} поиска $\operatorname{\text{НОД}}(P,Q)$:
+\begin{align*}
+	(P,Q): P &= QC+R_1, \\
+	(Q,R_1): Q &= R_1C_1+R_2, \\
+	(R_1,R_2): R_1 &= R_2C_2+R_3, \\
+	\ldots \\
+	(R_{k-1}, R_k): R_{k-1} &= R_kC_k+R_{k+1}, \; R_{k+1}=0, \\
+	(R_k,0).
+\end{align*}
+\begin{claim}
+	$R_k=\operatorname{\text{НОД}}(P,Q)$ по \hyperref[GCD_def2]{О2}.
+\end{claim}
+\begin{proof}
+	Рассмотрим множество всех общих делителей $P$ и $Q$: $\operatorname{\text{ОД}}(P,Q) = \operatorname{\text{ОД}}(Q,R_1) = \operatorname{\text{ОД}}(R_1,R_2) = \ldots = \operatorname{\text{ОД}}(R_k,0) = \{\text{делители } R_k\}$. Пусть $D$~-- делитель $P$ и $Q$ ($P \vdots D \land Q \vdots D$), т.е. $P=DP_1, Q=DQ_1$. Тогда $R_1 = P-QC = DP_1 - DQ_1C = D(P_1 - Q_1C) \Rightarrow R_1 \vdots D$.
+\end{proof}
+
+\begin{claim}
+	Из \hyperref[GCD_def1]{О1} следует \hyperref[GCD_def2]{О2}.
+\end{claim}
+\begin{proof}
+	Пусть $D$~-- НОД по О1, $D' = \operatorname{\text{НОД}}(P,Q)$ по О2. $D' \vdots D \Rightarrow D \sim D' \Rightarrow D$ отличается от $D'$ лишь умножением на константу.
+\end{proof}
+
+\begin{prop}
+	$P,Q \in \K[x]$, тогда $\exists U,V \in \K[x]: \operatorname{\text{НОД}}(P,Q) = UP+VQ$.
+\end{prop}
+\begin{proof}
+	Из \hyperref[Euclid_alg]{алгоритма Евклида} по индукции доказывается, что $R_i = U_i P + V_i Q,\; U_i,V_i \in \K[x]$. Тогда $P=1 \cdot P + 0 \cdot Q,\, Q=0 \cdot P + 1 \cdot Q; \quad R_{n+1} = R_{n-1} - C_n R_n = U_{n-1}P + V_{n-1}Q - C_n(U_n P + V_n Q) = (U_{n-1} - C_n U_n) + (V_{n-1} - C_n V_n)Q$.
+\end{proof}
+
+\begin{defin}
+	Многочлены $P,Q$ \underline{взаимно просты}, если $\operatorname{\text{НОД}}(P,Q)=1$.
+\end{defin}
+\phantomsection\label{coprime_corollary}\begin{cor}
+	Если $P,Q$ взаимно просты, то $\exists U,V \in \K[x]: PU+QV=1$.
+\end{cor}
+\begin{rem}
+	$P,Q \in \K[x]$. Если $Q$ неприводим, то либо $P$ и $Q$ взаимно просты либо $P \vdots Q$.
+\end{rem}
+
+\pagebreak
+\begin{lemma}[самая главная]
+	$P,Q,S \in \K[x]$:
+	\begin{enumerate}
+		\phantomsection\label{main_lemma_p1}\item $PQ \vdots S$, $Q$ и $S$ взаимно просты $\Rightarrow P \vdots S$;
+		\item $P_1 P_2 \vdots Q$ и $Q$ неприводим $\Rightarrow P_1 \vdots Q \lor P_2 \vdots Q$.
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+	\begin{enumerate}
+		\item Применим \hyperref[coprime_corollary]{предыдущее следствие}: $\exists U,V \in \K[x]: QU+SV=1 \Rightarrow \underbrace{PQU}_{\vdots S}+\underbrace{PSV}_{\vdots S}=P \vdots S$.
+		\item пусть $P_1 \not\vdots Q$, тогда $P_1$ и $Q$ взаимно просты. Тогда по \hyperref[main_lemma_p1]{ч.1 леммы} $P_2 \vdots Q$.
+	\end{enumerate}
+\end{proof}
+
+\begin{theo}[основная теорема арифметики для многочленов]
+	Любой многочлен $P(x)$ имеет разложение $P=P_1 \cdot \ldots \cdot P_n$, где $P_i$~-- неприводимый. Оно единственно: если $P=P_1 \cdot \ldots \cdot P_n = Q_1 \cdot \ldots \cdot Q_m$ ($P_i, Q_j$~-- неприводимы), то $n=m$ с точностью до перестановки сомножителей и $\forall i\, P_i \sim Q_i$.
+\end{theo}
+\begin{proof}
+	\underline{Существование}: если многочлен приводим, то его можно разложить на множители, степень которых будет меньше исходного. Так как степень многочлена не может убывать бесконечно, то за конечное количество шагов получим разложение на произведение неприводимых многочленов. \\
+	\underline{Единственность}: пусть $P_1 \cdot \ldots \cdot P_n = Q_1 \cdot \ldots \cdot Q_m$. Обе части делятся на $P_1$, тогда по \hyperref[main_lemma_p1]{ч.1 леммы} $\exists j: Q_j \vdots R_1, Q_j=cP_1, c=\text{const} \Rightarrow Q_j \sim P_1$. Переставим сомножители местами, чтобы $j=1: P_1 \cdot \ldots \cdot P_n = (cQ_1) \cdot Q_2 \cdot \ldots \cdot Q_m$. Дальше по индукции.\\
+\end{proof}
+
+Неприводимые многочлены:
+\begin{itemize}
+	\item $\K=\Complex$: многочлены степени 1;
+	\item $\K=\R$: многочлены степени 1 и многочлены степени 2 с отрицательным дискриминантом;
+	\item $\K=\Q$: сложно (алгебраические числа).
+\end{itemize}
